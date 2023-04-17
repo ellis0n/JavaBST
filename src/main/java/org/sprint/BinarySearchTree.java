@@ -1,8 +1,27 @@
+package org.sprint;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 public class BinarySearchTree {
-    private Node root;
+
+    // Node class has been made public to facilitate testing.
+    // In a real application, this would be private, and we wouldn't test
+    public static class Node {
+        public int data;
+        public Node left;
+        public Node right;
+
+        public Node(int data) {
+            this.data = data;
+        }
+
+        public int getData() {
+            return this.data;
+        }
+    }
+
+    Node root;
 
     public void insertNode(int data) {
         Node newNode = new Node(data);
@@ -30,8 +49,15 @@ public class BinarySearchTree {
         }
     }
 
-
+    // Get unformatted JSON representation (used for testing)
     public String getJSONRepresentation() {
+        Gson gson = new Gson();
+        return gson.toJson(this.root);
+    }
+
+
+    // Get formatted JSON representation (used for testing and CLI class)
+    public String getPrettyJSONRepresentation() {
         GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder.setPrettyPrinting();
         Gson gson = gsonBuilder.create();
@@ -39,13 +65,5 @@ public class BinarySearchTree {
     }
 
 
-    private static class Node {
-        int data;
-        Node left;
-        Node right;
 
-        public Node(int data) {
-            this.data = data;
-        }
-    }
 }

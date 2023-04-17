@@ -1,3 +1,5 @@
+package org.sprint;
+
 import java.util.Scanner;
 
 public class CLI {
@@ -10,7 +12,12 @@ public class CLI {
 
         String[] numbers = input.split(" ");
         for (String number : numbers) {
-            bst.insertNode(Integer.parseInt(number));
+            try {
+                int data = Integer.parseInt(number);
+                bst.insertNode(data);
+            } catch (NumberFormatException e) {
+                System.out.println("Error: \"" + number + "\" is not a valid integer. Skipping...");
+            }
         }
 
         String json = bst.getJSONRepresentation();
