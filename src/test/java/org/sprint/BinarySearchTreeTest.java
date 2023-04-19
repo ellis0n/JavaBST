@@ -56,6 +56,26 @@ public class BinarySearchTreeTest {
         Assert.assertEquals(expectedJSON, actualJSON);
     }
 
+    @Test
+    public void testInsertNodeDuplicate() {
+        BinarySearchTree bst = new BinarySearchTree();
+
+        bst.insertNode(50);
+        bst.insertNode(30);
+        bst.insertNode(70);
+        bst.insertNode(20);
+        bst.insertNode(60);
+
+        // Try to insert a duplicate value
+        bst.insertNode(30);
+
+        Assert.assertEquals(50, bst.root.getData());
+        Assert.assertEquals(30, bst.root.left.getData());
+        Assert.assertEquals(20, bst.root.left.left.getData());
+        Assert.assertEquals(70, bst.root.right.getData());
+        Assert.assertEquals(60, bst.root.right.left.getData());
+        Assert.assertNull(bst.root.left.right); // The duplicate value should not be inserted
+    }
 
 
 }
